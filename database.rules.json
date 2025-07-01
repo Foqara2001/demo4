@@ -1,0 +1,23 @@
+{
+  "rules": {
+    "resources": {
+      ".read": "auth != null",  
+      ".write": "auth != null && root.child('users').child(auth.uid).child('isAdmin').val() === true" 
+    },
+    "users": {
+      "$uid": {
+        
+        ".read": "auth != null && (auth.uid === $uid || root.child('users').child(auth.uid).child('isAdmin').val() === true)",
+        ".write": "auth != null && auth.uid === $uid",
+        
+       
+        "isAdmin": {
+          ".write": "auth != null && root.child('users').child(auth.uid).child('isAdmin').val() === true"
+        }
+      },
+      
+      ".read": "auth != null && root.child('users').child(auth.uid).child('isAdmin').val() === true",
+      ".write": "auth != null && root.child('users').child(auth.uid).child('isAdmin').val() === true"
+    }
+  }
+}
